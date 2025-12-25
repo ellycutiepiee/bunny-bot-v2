@@ -16,7 +16,18 @@
     "next-auth": "^4.24.13",
     "react": "^18",
     "react-dom": "^18",
-    "tailwind-merge": "^2.3.0"
+    "tailwind-merge": "^2.3.0",
+    "discord.js": "^14.16.3",
+    "kazagumo": "^3.4.0",
+    "kazagumo-spotify": "^2.1.1",
+    "shoukaku": "^4.2.0",
+    "spotify-url-info": "^3.2.18",
+    "youtube-sr": "^4.3.12",
+    "dotenv": "^17.2.3",
+    "express": "^5.2.1",
+    "isomorphic-unfetch": "^4.0.2",
+    "cross-env": "^7.0.3",
+    "ts-node": "^10.9.2"
   },
   "devDependencies": {
     "@types/node": "^20",
