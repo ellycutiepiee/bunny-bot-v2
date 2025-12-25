@@ -104,7 +104,16 @@ const kazagumo = new Kazagumo(
     },
   },
   new Connectors.DiscordJS(client),
-  Nodes
+  Nodes,
+  {
+    shoukaku: {
+      moveOnDisconnect: false,
+      resume: false,
+      reconnectTries: 5,
+      restTimeout: 10000,
+      voiceConnectionTimeout: 30000, // Increase timeout to 30s
+    },
+  }
 );
 
 // --- Kazagumo Events ---
@@ -273,7 +282,8 @@ client.on("messageCreate", async (message: Message) => {
   // !play command
   if (message.content.startsWith("!play")) {
     console.log(`[Command] !play received from ${message.author.tag}: ${message.content}`);
-    let query = message.content.replace("!play", "").trim();
+    // Replace !play and play to handle cases like "!play !play url"
+    let query = message.content.replace(/^!play\s*/i, "").replace(/^play\s*/i, "").replace(/^!play\s*/i, "").trim();
     if (!query) {
       message.reply("Please provide a song name or link!");
       return;
