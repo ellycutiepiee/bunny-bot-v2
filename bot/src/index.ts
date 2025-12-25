@@ -106,13 +106,11 @@ const kazagumo = new Kazagumo(
   new Connectors.DiscordJS(client),
   Nodes,
   {
-    shoukaku: {
-      moveOnDisconnect: false,
-      resume: false,
-      reconnectTries: 5,
-      restTimeout: 10000,
-      voiceConnectionTimeout: 30000, // Increase timeout to 30s
-    },
+    moveOnDisconnect: false,
+    resume: false,
+    reconnectTries: 5,
+    restTimeout: 10000,
+    voiceConnectionTimeout: 30000, // Increase timeout to 30s
   }
 );
 
