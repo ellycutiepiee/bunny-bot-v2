@@ -14,8 +14,48 @@ dotenv.config();
 const app = express();
 const port = process.env.PORT || 3000;
 
+// Serve a simple HTML page instead of just text
 app.get("/", (req, res) => {
-  res.send("🐰 Bunny Bot is alive and hopping!");
+  res.send(`
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Bunny Bot 🐰</title>
+        <style>
+            body {
+                background-color: #121212;
+                color: #DAA520; /* GoldenRod */
+                font-family: 'Arial', sans-serif;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                height: 100vh;
+                margin: 0;
+                text-align: center;
+            }
+            h1 { font-size: 3rem; margin-bottom: 10px; }
+            p { font-size: 1.2rem; color: #fff; }
+            .status {
+                margin-top: 20px;
+                padding: 10px 20px;
+                border: 2px solid #DAA520;
+                border-radius: 20px;
+                display: inline-block;
+            }
+        </style>
+    </head>
+    <body>
+        <h1>🐰 Bunny Bot</h1>
+        <p>Your ultimate Discord music companion.</p>
+        <div class="status">
+            🟢 <strong>Status:</strong> Online & Hopping!
+        </div>
+    </body>
+    </html>
+  `);
 });
 
 app.listen(port, () => {
@@ -46,7 +86,7 @@ const idleTimers = new Map<string, NodeJS.Timeout>();
 
 const kazagumo = new Kazagumo(
   {
-    defaultSearchEngine: "soundcloud", // Changed from youtube to soundcloud to avoid rate limits
+    defaultSearchEngine: "youtube", // Switch back to YouTube so our fallback logic works better
     plugins: [
       new Spotify({
         clientId: process.env.SPOTIFY_CLIENT_ID || "333a39f15c1e406385750033c46e254e", // Fallback public ID or use yours
