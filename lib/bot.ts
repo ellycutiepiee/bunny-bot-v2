@@ -1,4 +1,4 @@
-import { Client, GatewayIntentBits, Message, EmbedBuilder, ActionRowBuilder, ButtonBuilder, ButtonStyle, ComponentType, TextChannel } from "discord.js";
+import { Client, GatewayIntentBits, Message, EmbedBuilder, ActionRowBuilder, ButtonBuilder, ButtonStyle, ComponentType, TextChannel, MessageFlags } from "discord.js";
 import { Kazagumo, KazagumoPlayer, KazagumoTrack } from "kazagumo";
 import Spotify from "kazagumo-spotify";
 import { Connectors } from "shoukaku";
@@ -104,26 +104,26 @@ export function startBot() {
         collector.on("collect", async (i) => {
             const member = i.guild?.members.cache.get(i.user.id);
             if (!member?.voice.channelId || member.voice.channelId !== player.voiceId) {
-                await i.reply({ content: "You must be in the same voice channel!", ephemeral: true });
+                await i.reply({ content: "You must be in the same voice channel!", flags: MessageFlags.Ephemeral });
                 return;
             }
 
             switch (i.customId) {
                 case "replay":
                     player.seek(0);
-                    await i.reply({ content: "Replaying!", ephemeral: true });
+                    await i.reply({ content: "Replaying!", flags: MessageFlags.Ephemeral });
                     break;
                 case "like":
-                    await i.reply({ content: "Added to Liked Songs!", ephemeral: true });
+                    await i.reply({ content: "Added to Liked Songs!", flags: MessageFlags.Ephemeral });
                     break;
                 case "stop":
                     player.queue.length = 0;
                     player.skip();
-                    await i.reply({ content: "Stopped!", ephemeral: true });
+                    await i.reply({ content: "Stopped!", flags: MessageFlags.Ephemeral });
                     break;
                 case "skip":
                     player.skip();
-                    await i.reply({ content: "Skipped!", ephemeral: true });
+                    await i.reply({ content: "Skipped!", flags: MessageFlags.Ephemeral });
                     break;
                 case "pause_resume":
                     const paused = !player.paused;
