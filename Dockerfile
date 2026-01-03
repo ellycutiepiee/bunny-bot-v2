@@ -1,5 +1,5 @@
-# Use Node.js 18 as the base image
-FROM node:18-bullseye
+# Use Node.js 22 as the base image (Required by @discordjs/voice)
+FROM node:22-bullseye
 
 # Install Java 17 (Required for Lavalink)
 RUN apt-get update && \
