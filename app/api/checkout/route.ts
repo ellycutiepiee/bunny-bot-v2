@@ -18,7 +18,7 @@ export async function POST() {
     );
   }
 
-  const stripe = new Stripe(stripeSecret, { apiVersion: "2024-11-20" });
+  const stripe = new Stripe(stripeSecret);
 
   try {
     const checkout = await stripe.checkout.sessions.create({
