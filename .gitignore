@@ -9,3 +9,5 @@ build/
 bot/Lavalink/
 bot/java_runtime/
 bot/jdk17.zip
+
+/lib/generated/prisma

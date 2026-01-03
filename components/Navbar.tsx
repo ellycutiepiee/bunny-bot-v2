@@ -29,14 +29,21 @@ export default function Navbar() {
 
         {/* Desktop Links */}
         <div className="hidden md:flex items-center gap-8">
-          {["Home", "Invite", "Premium", "Commands", "Support"].map((item) => (
+          {[
+            { name: "Home", link: "/" },
+            { name: "Features", link: "/#features" },
+            { name: "Invite", link: process.env.NEXT_PUBLIC_DISCORD_INVITE_URL || "#", external: true },
+            { name: "Premium", link: "/premium" },
+            { name: "Commands", link: "/commands" },
+            { name: "Support", link: "/support" }
+          ].map((item) => (
             <Link
-              key={item}
-              href={item.toLowerCase() === "invite" ? (process.env.NEXT_PUBLIC_DISCORD_INVITE_URL || "#") : `/${item.toLowerCase() === "home" ? "" : item.toLowerCase()}`}
+              key={item.name}
+              href={item.link}
               className="text-gray-300 hover:text-white font-medium transition-colors text-sm uppercase tracking-wider"
-              target={item.toLowerCase() === "invite" ? "_blank" : undefined}
+              target={item.external ? "_blank" : undefined}
             >
-              {item}
+              {item.name}
             </Link>
           ))}
         </div>
@@ -86,15 +93,22 @@ export default function Navbar() {
       {/* Mobile Menu */}
       {isOpen && (
         <div className="md:hidden bg-black border-t border-white/10 absolute top-20 left-0 right-0 p-6 flex flex-col gap-4">
-          {["Home", "Invite", "Premium", "Commands", "Support"].map((item) => (
+          {[
+            { name: "Home", link: "/" },
+            { name: "Features", link: "/#features" },
+            { name: "Invite", link: process.env.NEXT_PUBLIC_DISCORD_INVITE_URL || "#", external: true },
+            { name: "Premium", link: "/premium" },
+            { name: "Commands", link: "/commands" },
+            { name: "Support", link: "/support" }
+          ].map((item) => (
             <Link
-              key={item}
-              href={item.toLowerCase() === "invite" ? (process.env.NEXT_PUBLIC_DISCORD_INVITE_URL || "#") : `/${item.toLowerCase() === "home" ? "" : item.toLowerCase()}`}
+              key={item.name}
+              href={item.link}
               className="text-gray-300 hover:text-white font-medium py-2"
               onClick={() => setIsOpen(false)}
-              target={item.toLowerCase() === "invite" ? "_blank" : undefined}
+              target={item.external ? "_blank" : undefined}
             >
-              {item}
+              {item.name}
             </Link>
           ))}
           {session ? (

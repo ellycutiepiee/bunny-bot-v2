@@ -1,0 +1,35 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id              String   @id // Discord User ID
+  premiumExpiresAt DateTime?
+  createdAt       DateTime @default(now())
+  history         SongLog[]
+}
+
+model SongLog {
+  id        Int      @id @default(autoincrement())
+  userId    String
+  title     String
+  author    String
+  url       String?
+  playedAt  DateTime @default(now())
+  user      User     @relation(fields: [userId], references: [id])
+}
+
+model Guild {
+  id              String   @id // Discord Guild ID
+  isPremium       Boolean  @default(false)
+  premiumExpiresAt DateTime?
+  createdAt       DateTime @default(now())
+}
